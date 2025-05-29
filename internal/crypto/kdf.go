@@ -2,10 +2,8 @@ package crypto
 
 import (
 	"crypto/hmac"
-	"crypto/rand"
 	"crypto/sha256"
 	"hash"
-	"math/big"
 )
 
 // HKDF implements the HMAC-based Extract-and-Expand Key Derivation Function
@@ -21,7 +19,7 @@ func HKDF(ikm, salt, info []byte, length int) []byte {
 
 // hkdfExtract performs the HKDF extract operation
 func hkdfExtract(hashFunc func() hash.Hash, ikm, salt []byte) []byte {
-	if salt == nil || len(salt) == 0 {
+	if len(salt) == 0 {
 		salt = make([]byte, hashFunc().Size())
 	}
 	extractor := hmac.New(hashFunc, salt)
@@ -53,26 +51,4 @@ func HMACSHA256(key, message []byte) []byte {
 	h := hmac.New(sha256.New, key)
 	h.Write(message)
 	return h.Sum(nil)
-}
-
-// randomInt generates a random integer in the range [0, max)
-func randomInt(max *big.Int) (*big.Int, error) {
-	r, err := rand.Int(rand.Reader, max)
-	if err != nil {
-		return nil, err
-	}
-	return r, nil
-}
-
-// constantTimeCompare compares two byte slices in constant time
-func constantTimeCompare(a, b []byte) bool {
-	if len(a) != len(b) {
-		return false
-	}
-
-	var result uint8
-	for i := 0; i < len(a); i++ {
-		result |= a[i] ^ b[i]
-	}
-	return result == 0
 }

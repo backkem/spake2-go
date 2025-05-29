@@ -73,7 +73,7 @@ func P256Group() Group {
 }
 
 func NewPoint(c Group, x, y *big.Int) (kyber.Point, error) {
-	// Workaround to construct a kyber point
+	//lint:ignore SA1019 deprecated function used for compatibility
 	b := elliptic.Marshal(c.Curve(), x, y)
 	p := c.Point()
 	err := p.UnmarshalBinary(b)

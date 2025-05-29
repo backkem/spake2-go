@@ -2,7 +2,6 @@ package spake2
 
 import (
 	"encoding/binary"
-	"math/big"
 )
 
 // Transcript represents the protocol transcript used to derive keys
@@ -78,15 +77,4 @@ func encodeLength(data []byte) []byte {
 	length := make([]byte, 8)
 	binary.LittleEndian.PutUint64(length, uint64(len(data)))
 	return length
-}
-
-// padBigInt pads a big integer to a fixed length in bytes
-func padBigInt(value *big.Int, length int) []byte {
-	result := make([]byte, length)
-	bytes := value.Bytes()
-
-	// Copy bytes from the end of the result array
-	copy(result[length-len(bytes):], bytes)
-
-	return result
 }

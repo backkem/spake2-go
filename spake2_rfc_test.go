@@ -73,6 +73,7 @@ func parseHexPoint(c crypto.Group, hexStr string) (kyber.Point, error) {
 
 	// Handle uncompressed point format (0x04 prefix)
 	if b[0] == 0x04 && len(b) == c.PointLen() {
+		//lint:ignore SA1019 deprecated function used for compatibility
 		x, y := elliptic.Unmarshal(c.Curve(), b)
 		if x == nil || y == nil {
 			return nil, fmt.Errorf("invalid uncompressed point encoding")
@@ -92,7 +93,6 @@ func parseHexPoint(c crypto.Group, hexStr string) (kyber.Point, error) {
 	// Return error for unsupported formats
 	return nil, fmt.Errorf("invalid point format: unrecognized prefix or length")
 }
-
 func mustParseHexPoint(c crypto.Group, hexStr string) kyber.Point {
 	p, err := parseHexPoint(c, hexStr)
 	if err != nil {
