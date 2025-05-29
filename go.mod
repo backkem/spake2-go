@@ -1,6 +1,6 @@
 module github.com/backkem/spake2
 
-go 1.22.3
+go 1.24
 
 require go.dedis.ch/kyber/v4 v4.0.0-pre2
 
