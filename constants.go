@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"hash"
 
-	"github.com/backkem/spake2/internal/crypto"
+	"github.com/backkem/spake2-go/internal/crypto"
 	"go.dedis.ch/kyber/v4"
 )
 

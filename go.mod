@@ -1,4 +1,4 @@
-module github.com/backkem/spake2
+module github.com/backkem/spake2-go
 
 go 1.24
 
